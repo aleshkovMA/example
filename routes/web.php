@@ -14,7 +14,7 @@ use App\Http\Controllers\MainController;
 |
 */
 
-Route::get('/', [MainController::class,'home']);
+Route::get('/', [MainController::class,'home'])->name('home');
 Route::get('/auth', [MainController::class,'auth']);
 Route::get('/reg', [MainController::class,'reg']);
 Route::post('/check', [MainController::class,'check']);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MainModel;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -20,6 +21,17 @@ class MainController extends Controller
     }
     public function check(Request $request)
     {
-        dd($request);
+        $valid = $request->validate(['paste'=>'required']);
+        $paste = new MainModel();
+        $paste->text = $request->input('paste');
+        //$paste->author = $request->input('paste');
+        $paste->access = $request->input('access');
+        if($request->input('expirationTime')!="unlimited")
+        {
+            $paste->typedtime = $request->input('expirationTime');
+        }
+        $paste->save();
+
+        return redirect()->route('home');
     }
 }
